@@ -165,7 +165,7 @@ MonoBehaviour:
   MergedObjectItem: {fileID: 6717730884297519907, guid: 256925e1e7f1d4e08987443b98d4ec62, type: 3}
   delay: 0.5
   ObjectTwo: {fileID: 0}
-  Distance: 0.05
+  Distance: 0.2
   MergeSpeed: 0.4
   canMerge: 0
   isInteracted: 0

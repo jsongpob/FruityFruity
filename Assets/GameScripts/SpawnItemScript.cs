@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class SpawnItemScript : MonoBehaviour
 {
+    public StatusOfWaitingForSpawn statusBar;
+
     public SpriteRenderer ControllerRender;
     Rigidbody2D ActiveRigid;
 
@@ -17,17 +19,25 @@ public class SpawnItemScript : MonoBehaviour
     int Counting = 0;
     public static int RandomObjectItems;
 
+    bool canSpawn = true;
+    float TimerSpawn = 0f;
+    public float TimerDelay = 1f;
+
     void Start()
     {
         //ControllerRender = GetComponent<SpriteRenderer>();
         //ControllerRender.enabled = false;
+        statusBar.setMaxFill(TimerDelay);
 
         RandomObjectItems = 0;
+        //StartCoroutine(WaitForSpawn());
     }
 
     void Update()
     {
         RandomObjectSpawn();
+
+        statusBar.setFill(TimerSpawn);
     }
 
     void RandomObjectSpawn()
@@ -35,12 +45,26 @@ public class SpawnItemScript : MonoBehaviour
         float moveX = Input.GetAxis("Horizontal");
         transform.position += new Vector3(moveX, 0f, 0f) * Time.deltaTime * 3f;
 
-        if (Input.GetKeyUp(KeyCode.Space))
+        if(canSpawn == false)
+        {
+            TimerSpawn += Time.deltaTime;
+            if (TimerSpawn > TimerDelay)
+            {
+                Debug.Log("Can Spawn!" + canSpawn);
+                TimerSpawn = 0f;
+                canSpawn = true;
+            }
+        }
+
+        if (Input.GetKeyUp(KeyCode.Space) && canSpawn)
         {
             GameObject Fruit = Instantiate(ObjectPlayItems[RandomObjectItems], this.transform.position, Quaternion.identity);
             MergeController.Instance.DictMerge.Add(Fruit.GetComponent<MergeObject>(), false);
 
             RandomObjectItems = Random.Range(0, ObjectPlayItems.Length);
+
+            canSpawn = false;
+
         }
     }
 
@@ -90,4 +114,10 @@ public class SpawnItemScript : MonoBehaviour
 
         Countingtext.text = Counting.ToString();
     }
+
+    //IEnumerator WaitForSpawn()
+    //{
+    //    yield return new WaitForSeconds(1f);
+    //    canSpawn = true;
+    //}
 }
