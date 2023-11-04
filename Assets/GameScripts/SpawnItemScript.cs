@@ -20,7 +20,7 @@ public class SpawnItemScript : MonoBehaviour
     public static int RandomObjectItems;
 
     bool canSpawn = true;
-    float TimerSpawn = 0f;
+    public static float TimerSpawn = 0f;
     public float TimerDelay = 1f;
 
     public GameObject IndecatorLine;
@@ -30,6 +30,7 @@ public class SpawnItemScript : MonoBehaviour
         //ControllerRender = GetComponent<SpriteRenderer>();
         //ControllerRender.enabled = false;
         statusBar.setMaxFill(TimerDelay);
+        statusBar.setFill(0);
 
         RandomObjectItems = 0;
         //StartCoroutine(WaitForSpawn());
@@ -39,7 +40,10 @@ public class SpawnItemScript : MonoBehaviour
     {
         if (!DeadLineDetectionScript.onDead)
         {
-            RandomObjectSpawn();
+            if (!ScoreCalulateScript.canDurainTime)
+            {
+                RandomObjectSpawn();
+            }
         }
         statusBar.setFill(TimerSpawn);
     }
@@ -64,7 +68,7 @@ public class SpawnItemScript : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Space) && canSpawn)
         {
             GameObject Fruit = Instantiate(ObjectPlayItems[RandomObjectItems], this.transform.position, Quaternion.identity);
-            MergeController.Instance.DictMerge.Add(Fruit.GetComponent<MergeObject>(), false);
+            //MergeController.Instance.DictMerge.Add(Fruit.GetComponent<MergeObject>(), false);
 
             RandomObjectItems = Random.Range(0, ObjectPlayItems.Length);
 

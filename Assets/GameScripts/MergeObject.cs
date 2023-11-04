@@ -4,23 +4,28 @@ using UnityEngine;
 
 public class MergeObject : MonoBehaviour
 {
+    int ObjectID;
+
+    [Header("Object Merge")]
+    public GameObject MergedObjectItem;
+    [Range(0f, 5f)] public float delay = 0.5f;
+    [Range(0f, 10f)] public float Distance;
+    [Range(0f, 10f)] public float MergeSpeed;
+
+    [Header("Object Tag")]
     public string GameObjectTag;
 
-    int ObjectID;
-    public GameObject MergedObjectItem;
-    [Range(0.1f, 1f)] public float delay = 0.5f;
-
+    [Header("Score")]
+    public int thisObjectScore = 0;
+    public bool HasBonus = false;
+    public int BonusScore = 0;
 
     Transform ObjectOne;
-    public Transform ObjectTwo;
+    Transform ObjectTwo;
 
-    public float Distance;
-    public float MergeSpeed;
-
-    public bool canMerge = false;
+    bool canMerge = false;
     bool startMerge = false;
 
-    public int isInteracted = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -61,17 +66,11 @@ public class MergeObject : MonoBehaviour
                 Destroy(this.gameObject);
 
                 GameObject NewMargedObject = Instantiate(MergedObjectItem, transform.position, Quaternion.identity);
-                MergeController.Instance.DictMerge.Add(NewMargedObject.GetComponent<MergeObject>(), false);
-                NewMargedObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 2, ForceMode2D.Impulse);
+                //MergeController.Instance.DictMerge.Add(NewMargedObject.GetComponent<MergeObject>(), false);
+                //NewMargedObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 2, ForceMode2D.Impulse);
+                NewMargedObject.GetComponent<Rigidbody2D>();
 
-                //Debug.Log("MoveToWard");
-
-                ScoreCalulateScript.instance.AddPoint(false);
-
-                if (this.gameObject.CompareTag("Four"))
-                {
-                    ScoreCalulateScript.instance.AddPoint(true);
-                }
+                AddPoint();
             }
         }
     }
@@ -126,6 +125,11 @@ public class MergeObject : MonoBehaviour
         {
             Destroy(this.gameObject.GetComponent<Rigidbody2D>());
         }
+    }
+
+    void AddPoint()
+    {
+        ScoreCalulateScript.instance.AddPoint(thisObjectScore, HasBonus, BonusScore);
     }
 
     public IEnumerator WaitingMerged()

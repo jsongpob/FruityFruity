@@ -162,14 +162,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff5e846ea5db5424c8c515a67752a50f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameObjectTag: Three
   MergedObjectItem: {fileID: 766899016824949305, guid: 05e0dba82915541a59ae147b25177320, type: 3}
   delay: 0.5
-  ObjectTwo: {fileID: 0}
-  Distance: 0.1
+  Distance: 0.5
   MergeSpeed: 1
-  canMerge: 0
-  isInteracted: 0
+  GameObjectTag: Three
+  thisObjectScore: 2
+  HasBonus: 0
+  BonusScore: 0
 --- !u!114 &6739787454549030136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,4 +183,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerDetectTime: 2
-  DeadLinePOS: 3.2
+  DeadLinePOS: 3.3
