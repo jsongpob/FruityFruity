@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7135093537401790105}
   - component: {fileID: 8960705868803471286}
   - component: {fileID: 385917680855067928}
+  - component: {fileID: -5956960900244853323}
   m_Layer: 0
   m_Name: Lime
   m_TagString: One
@@ -165,7 +166,21 @@ MonoBehaviour:
   MergedObjectItem: {fileID: 6285903811344188287, guid: 42313aebd51374189a0d290282258999, type: 3}
   delay: 0.5
   ObjectTwo: {fileID: 0}
-  Distance: 0.2
-  MergeSpeed: 0.4
+  Distance: 0.1
+  MergeSpeed: 1
   canMerge: 0
   isInteracted: 0
+--- !u!114 &-5956960900244853323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7432771351588596032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f13d6da5a3894a058fbcbd8375f02e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerDetectTime: 2
+  DeadLinePOS: 3.2

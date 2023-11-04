@@ -23,6 +23,8 @@ public class SpawnItemScript : MonoBehaviour
     float TimerSpawn = 0f;
     public float TimerDelay = 1f;
 
+    public GameObject IndecatorLine;
+
     void Start()
     {
         //ControllerRender = GetComponent<SpriteRenderer>();
@@ -35,8 +37,10 @@ public class SpawnItemScript : MonoBehaviour
 
     void Update()
     {
-        RandomObjectSpawn();
-
+        if (!DeadLineDetectionScript.onDead)
+        {
+            RandomObjectSpawn();
+        }
         statusBar.setFill(TimerSpawn);
     }
 
@@ -44,13 +48,14 @@ public class SpawnItemScript : MonoBehaviour
     {
         float moveX = Input.GetAxis("Horizontal");
         transform.position += new Vector3(moveX, 0f, 0f) * Time.deltaTime * 3f;
+        IndecatorLine.gameObject.transform.position += new Vector3(moveX, 0f, 0f) * Time.deltaTime * 3f;
 
-        if(canSpawn == false)
+        if (canSpawn == false)
         {
             TimerSpawn += Time.deltaTime;
             if (TimerSpawn > TimerDelay)
             {
-                Debug.Log("Can Spawn!" + canSpawn);
+                //Debug.Log("canSpawn: " + canSpawn);
                 TimerSpawn = 0f;
                 canSpawn = true;
             }

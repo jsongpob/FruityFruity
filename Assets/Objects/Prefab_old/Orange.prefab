@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7045750370697040727}
   - component: {fileID: 4956998615311938043}
   - component: {fileID: 6321655487266938239}
+  - component: {fileID: 5112393043585264129}
   m_Layer: 0
   m_Name: Orange
   m_TagString: Two
@@ -165,7 +166,21 @@ MonoBehaviour:
   MergedObjectItem: {fileID: 6717730884297519907, guid: 256925e1e7f1d4e08987443b98d4ec62, type: 3}
   delay: 0.5
   ObjectTwo: {fileID: 0}
-  Distance: 0.2
-  MergeSpeed: 0.4
+  Distance: 0.1
+  MergeSpeed: 1
   canMerge: 0
   isInteracted: 0
+--- !u!114 &5112393043585264129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6285903811344188287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f13d6da5a3894a058fbcbd8375f02e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerDetectTime: 2
+  DeadLinePOS: 3.2

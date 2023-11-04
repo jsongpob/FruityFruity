@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6268175464860638107}
   - component: {fileID: 1109782673298898546}
   - component: {fileID: 1567174707036552963}
+  - component: {fileID: 6739787454549030136}
   m_Layer: 0
   m_Name: Mangosteen
   m_TagString: Three
@@ -165,7 +166,21 @@ MonoBehaviour:
   MergedObjectItem: {fileID: 766899016824949305, guid: 05e0dba82915541a59ae147b25177320, type: 3}
   delay: 0.5
   ObjectTwo: {fileID: 0}
-  Distance: 0.2
-  MergeSpeed: 0.4
+  Distance: 0.1
+  MergeSpeed: 1
   canMerge: 0
   isInteracted: 0
+--- !u!114 &6739787454549030136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6717730884297519907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f13d6da5a3894a058fbcbd8375f02e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerDetectTime: 2
+  DeadLinePOS: 3.2

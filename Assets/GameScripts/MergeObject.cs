@@ -19,8 +19,6 @@ public class MergeObject : MonoBehaviour
 
     public bool canMerge = false;
     bool startMerge = false;
-    float Objecttimer;
-    int ObjectCount = 0;
 
     public int isInteracted = 0;
 
@@ -34,12 +32,6 @@ public class MergeObject : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //Objecttimer += Time.deltaTime;
-        //if (Objecttimer > delay)
-        //{
-        //    startMerge = true;
-        //}
-
         if (ObjectOne != null && ObjectTwo != null && canMerge)
         {
             MoveToward();
@@ -48,6 +40,8 @@ public class MergeObject : MonoBehaviour
                 gameObject.AddComponent<Rigidbody2D>();
             }
         }
+
+        onDead();
 
     }
 
@@ -61,7 +55,7 @@ public class MergeObject : MonoBehaviour
             {
                 if (ObjectID < ObjectTwo.gameObject.GetComponent<MergeObject>().ObjectID) { return; }
 
-                Debug.Log($"From {gameObject.name} With ID: {ObjectID}");
+                //Debug.Log($"From {gameObject.name} With ID: {ObjectID}");
 
                 Destroy(ObjectTwo.gameObject);
                 Destroy(this.gameObject);
@@ -70,7 +64,7 @@ public class MergeObject : MonoBehaviour
                 MergeController.Instance.DictMerge.Add(NewMargedObject.GetComponent<MergeObject>(), false);
                 NewMargedObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 2, ForceMode2D.Impulse);
 
-                Debug.Log("MoveToWard");
+                //Debug.Log("MoveToWard");
 
                 ScoreCalulateScript.instance.AddPoint(false);
 
@@ -98,18 +92,6 @@ public class MergeObject : MonoBehaviour
         //    return;
         //}
 
-        if (startMerge && transform.position.y < 3)
-        {
-            ObjectOne = transform;
-            ObjectTwo = collision.transform;
-
-            Debug.Log($"{gameObject.name} {collision.gameObject.name}");
-
-            StartCoroutine(WaitingObject());
-
-            Debug.Log("OnCollision");
-        }
-
         //if (collision.gameObject.GetComponent<MergeObject>().ObjectTwo != transform)
         //{
         //    gameObject.AddComponent<Rigidbody2D>();
@@ -122,7 +104,27 @@ public class MergeObject : MonoBehaviour
             Destroy(this.gameObject.GetComponent<Rigidbody2D>());
             canMerge = true;
             //MergeController.Instance.Duos.Add(new MergeDuo(this, ObjectTwo.GetComponent<MergeObject>()));
-            //StartCoroutine(WaitingObject());
+            StartCoroutine(WaitingObject());
+        }
+
+        if (startMerge && transform.position.y < 3)
+        {
+            ObjectOne = transform;
+            ObjectTwo = collision.transform;
+
+            //Debug.Log($"{gameObject.name} {collision.gameObject.name}");
+
+            StartCoroutine(WaitingObject());
+
+            //Debug.Log("OnCollision");
+        }
+    }
+
+    void onDead()
+    {
+        if (DeadLineDetectionScript.onDead)
+        {
+            Destroy(this.gameObject.GetComponent<Rigidbody2D>());
         }
     }
 
@@ -135,6 +137,9 @@ public class MergeObject : MonoBehaviour
     IEnumerator WaitingObject()
     {
         yield return new WaitForSeconds(0.1f);
-        gameObject.AddComponent<Rigidbody2D>();
+        if (gameObject.GetComponent<Rigidbody2D>() == null)
+        {
+            gameObject.AddComponent<Rigidbody2D>();
+        }
     }
 }

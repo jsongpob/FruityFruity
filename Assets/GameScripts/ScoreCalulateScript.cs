@@ -25,7 +25,10 @@ public class ScoreCalulateScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (DeadLineDetectionScript.onDead)
+        {
+            bonusText.text = "Fail!";
+        }
     }
 
     private void Awake()
