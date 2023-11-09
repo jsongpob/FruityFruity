@@ -22,8 +22,9 @@ public class ScoreCalulateScript : MonoBehaviour
 
     [Header("Durain Time")]
     public float BonusTimeSec = 2f;
+    //public float BonusPoint = 0f;
 
-    float score = 0;
+    public static float score = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -42,6 +43,14 @@ public class ScoreCalulateScript : MonoBehaviour
             bonusText.text = "Fail!";
         }
 
+        if (MergeObject.WataermalonMarge)
+        {
+            Debug.Log("Watermalon!");
+            score += 500;
+            MergeObject.WataermalonMarge = false;
+        }
+
+
         onUpdateBonus();
     }
 
@@ -50,12 +59,13 @@ public class ScoreCalulateScript : MonoBehaviour
         instance = this;
     }
 
-    public void AddPoint(int Score, bool Bonus, int BonusScore)
+    public void AddPoint(int Score, bool Bonus, int BonusScore, float BonusPoint)
     {
         score += Score * Multiplier;
-        if(Bonus == true)
+        score += BonusScore;
+        if (Bonus == true)
         {
-            AddBonusPoint(0.2f);
+            AddBonusPoint(BonusPoint);
             bonusText.text = "Bonus!";
             BCFActive = true;
         }

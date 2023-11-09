@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DurainTimeScript : MonoBehaviour
 {
+    public static DurainTimeScript instance;
+
     [Header("Setting")]
     public string[] GameObjectTag;
     public int thisObjectScore;
@@ -21,6 +23,7 @@ public class DurainTimeScript : MonoBehaviour
             if (destorytimer > DestoryDelay)
             {
                 Destroy(this.gameObject);
+                destorytimer = 0;
             }
         }
     }
@@ -31,7 +34,7 @@ public class DurainTimeScript : MonoBehaviour
         {
             if (collision.gameObject.CompareTag(GameObjectTag[i]))
             {
-                ScoreCalulateScript.instance.AddPoint(thisObjectScore, HasBonus, BonusScore);
+                ScoreCalulateScript.instance.AddPoint(thisObjectScore, HasBonus, BonusScore, 0);
                 Destroy(collision.gameObject);
             }
         }

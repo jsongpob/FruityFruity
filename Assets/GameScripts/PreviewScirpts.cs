@@ -6,6 +6,9 @@ public class PreviewScirpts : MonoBehaviour
 {
 
     public Sprite[] ObjectPlayablePicture;
+    Vector3 Size;
+    SpriteRenderer ColorMask;
+    float timer;
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +19,9 @@ public class PreviewScirpts : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Size = SpawnItemScript.gameObjectSize.transform.localScale;
         GetComponent<SpriteRenderer>().sprite = ObjectPlayablePicture[SpawnItemScript.RandomObjectItems];
-        transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        transform.localScale = new Vector3(Size.x, Size.y, Size.z);
+        ColorMask = GetComponent<SpriteRenderer>();
     }
 }

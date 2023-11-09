@@ -15,6 +15,7 @@ public class SpawnItemScript : MonoBehaviour
     public Text Countingtext;
 
     public GameObject[] ObjectPlayItems;
+    public static Renderer gameObjectSize;
 
     int Counting = 0;
     public static int RandomObjectItems;
@@ -25,6 +26,8 @@ public class SpawnItemScript : MonoBehaviour
 
     public GameObject IndecatorLine;
 
+    bool DelayOnStart;
+
     void Start()
     {
         //ControllerRender = GetComponent<SpriteRenderer>();
@@ -33,19 +36,26 @@ public class SpawnItemScript : MonoBehaviour
         statusBar.setFill(0);
 
         RandomObjectItems = 0;
+
+        gameObjectSize = ObjectPlayItems[RandomObjectItems].GetComponent<SpriteRenderer>();
         //StartCoroutine(WaitForSpawn());
     }
 
     void Update()
     {
-        if (!DeadLineDetectionScript.onDead)
+        DelayStart();
+
+        if (DelayOnStart)
         {
-            if (!ScoreCalulateScript.canDurainTime)
+            if (!DeadLineDetectionScript.onDead)
             {
-                RandomObjectSpawn();
+                if (!ScoreCalulateScript.canDurainTime)
+                {
+                    RandomObjectSpawn();
+                }
             }
+            statusBar.setFill(TimerSpawn);
         }
-        statusBar.setFill(TimerSpawn);
     }
 
     void RandomObjectSpawn()
@@ -71,6 +81,7 @@ public class SpawnItemScript : MonoBehaviour
             //MergeController.Instance.DictMerge.Add(Fruit.GetComponent<MergeObject>(), false);
 
             RandomObjectItems = Random.Range(0, ObjectPlayItems.Length);
+            gameObjectSize = ObjectPlayItems[RandomObjectItems].GetComponent<SpriteRenderer>();
 
             canSpawn = false;
 
@@ -129,4 +140,21 @@ public class SpawnItemScript : MonoBehaviour
     //    yield return new WaitForSeconds(1f);
     //    canSpawn = true;
     //}
+
+    float delaystart;
+    bool disabledelay = false;
+
+    void DelayStart()
+    {
+        if (!disabledelay)
+        {
+            delaystart += Time.deltaTime;
+            if (delaystart >= 4f)
+            {
+                DelayOnStart = true;
+                disabledelay = true;
+                delaystart = 0f;
+            }
+        }
+    }
 }
