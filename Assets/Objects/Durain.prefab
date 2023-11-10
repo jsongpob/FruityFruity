@@ -171,6 +171,7 @@ MonoBehaviour:
   - Pear
   - Pomegranate
   - Mango
+  - DragonFruit
   thisObjectScore: 200
   HasBonus: 0
   BonusScore: 0

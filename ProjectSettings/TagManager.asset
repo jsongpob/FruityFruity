@@ -16,6 +16,12 @@ TagManager:
   - PineApple
   - Watermalon
   - Two
+  - One
+  - Three
+  - Four
+  - SoundEffect
+  - database
+  - SoundPlayers
   layers:
   - Default
   - TransparentFX

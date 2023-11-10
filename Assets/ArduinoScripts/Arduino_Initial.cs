@@ -13,6 +13,21 @@ public class Arduino_Initial : MonoBehaviour
     public static int vib_Value2;
     public static int tou_Value3;
 
+    public static Arduino_Initial instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     // Use this for initialization
     void Start()
     {
@@ -32,7 +47,7 @@ public class Arduino_Initial : MonoBehaviour
             vib_Value2 = int.Parse(valueStack[1]);
             tou_Value3 = int.Parse(valueStack[2]);
 
-            //print(valueStack[0] + " " + valueStack[1] + " " + valueStack[2]);
+            print(vol_Value1 + " " + vib_Value2 + " " + tou_Value3);
 
         }
         catch (System.Exception) { }

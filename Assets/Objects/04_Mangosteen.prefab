@@ -171,7 +171,7 @@ MonoBehaviour:
   thisObjectScore: 4
   HasBonus: 1
   BonusScore: 0
-  BonusPoint: 0.01
+  BonusPoint: 0.005
 --- !u!114 &3823061155786804945
 MonoBehaviour:
   m_ObjectHideFlags: 0

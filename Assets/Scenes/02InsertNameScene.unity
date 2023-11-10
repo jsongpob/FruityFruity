@@ -224,6 +224,7 @@ MonoBehaviour:
   playerScoreTitle: {fileID: 0}
   highestScoreTitle: {fileID: 0}
   endTitleAnimate: {fileID: 0}
+  HighestImage: {fileID: 0}
   overAllTitleAnimate: {fileID: 0}
 --- !u!4 &70046766
 Transform:

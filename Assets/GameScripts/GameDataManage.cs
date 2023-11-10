@@ -26,6 +26,9 @@ public class GameDataManage : MonoBehaviour
 
     float timerRestart = 0f;
 
+    insertToDataBase database;
+    EffectPlayer effectplayerscript;
+
     //GAMEDATA MANAGEMENT
     public static float GamedataScore = 0f;
     public static float GamedataHighestScore = 0f;
@@ -34,14 +37,19 @@ public class GameDataManage : MonoBehaviour
 
     private void Start()
     {
+        database = GameObject.FindGameObjectWithTag("database").GetComponent<insertToDataBase>();
+        effectplayerscript = GameObject.FindGameObjectWithTag("SoundEffect").GetComponent<EffectPlayer>();
         HighestImage.enabled = false;
         InvokeRepeating("onDataSummitAtInsert", 5f, 1f);
+        effectplayerscript.runWooshSound();
     }
 
     private void Update()
     {
         if (DeadLineDetectionScript.onDead)
         {
+            //PLAY SOUNDS
+
             //COLLECT DATA
             GamedataScore = ScoreCalulateScript.score;
 
@@ -55,6 +63,7 @@ public class GameDataManage : MonoBehaviour
             if (RunCongreatAnimate)
             {
                 StartCoroutine(AnimationEndGame());
+                effectplayerscript.runPlayCongreatVoice();
             }
 
             //SHOW DATA AFTER PLAYED
@@ -64,16 +73,18 @@ public class GameDataManage : MonoBehaviour
 
             //GAME RESET
             timerRestart += Time.deltaTime;
-            Debug.Log($"Count Down to Restart Game in {timerRestart}");
+            //Debug.Log($"Count Down to Restart Game in {timerRestart}");
             if (timerRestart > 180f)
             {
-                SceneManager.LoadScene("ShakeScene");
+                SceneManager.LoadScene("01IdleScene");
                 ResetGame();
                 timerRestart = 0f;
             }
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                //INSERT DATABASE
+                database.On_ClickInsertDatabase();
                 SceneManager.LoadScene("ShakeScene");
                 ResetGame();
             }

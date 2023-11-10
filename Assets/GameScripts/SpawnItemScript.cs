@@ -51,7 +51,7 @@ public class SpawnItemScript : MonoBehaviour
             {
                 if (!ScoreCalulateScript.canDurainTime)
                 {
-                    RandomObjectSpawn();
+                    RandomObjectSpawnProduction();
                 }
             }
             statusBar.setFill(TimerSpawn);
@@ -85,6 +85,39 @@ public class SpawnItemScript : MonoBehaviour
 
             canSpawn = false;
 
+        }
+    }
+
+    void RandomObjectSpawnProduction()
+    {
+        float spawnMove = (Arduino_Initial.vol_Value1 - 500f) / 200f;
+        transform.position = new Vector3(spawnMove, 4, 0);
+        IndecatorLine.gameObject.transform.position += new Vector3(spawnMove, 0f, 0f);
+
+        if (canSpawn == false)
+        {
+            TimerSpawn += Time.deltaTime;
+            if (TimerSpawn > TimerDelay)
+            {
+                //Debug.Log("canSpawn: " + canSpawn);
+                TimerSpawn = 0f;
+                canSpawn = true;
+            }
+        }
+
+        if (Arduino_Initial.tou_Value3 == 1 && canSpawn)
+        {
+            Counting++;
+            if (Counting >= maxCounting)
+            {
+                GameObject Fruit = Instantiate(ObjectPlayItems[RandomObjectItems], this.transform.position, Quaternion.identity);
+                RandomObjectItems = Random.Range(0, ObjectPlayItems.Length);
+                gameObjectSize = ObjectPlayItems[RandomObjectItems].GetComponent<SpriteRenderer>();
+
+                canSpawn = false;
+
+            }
+            //MergeController.Instance.DictMerge.Add(Fruit.GetComponent<MergeObject>(), false);
         }
     }
 

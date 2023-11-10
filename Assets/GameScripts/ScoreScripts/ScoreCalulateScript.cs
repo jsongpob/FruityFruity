@@ -26,6 +26,11 @@ public class ScoreCalulateScript : MonoBehaviour
 
     public static float score = 0;
 
+    EffectPlayer effectplayerscript;
+    bool canRunthisSound = true;
+    bool canRunthisSound2 = true;
+    bool canRunthisSound3 = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +38,8 @@ public class ScoreCalulateScript : MonoBehaviour
         bonusText.text = "";
 
         BonusCircleFill.fillAmount = 0;
+
+        effectplayerscript = GameObject.FindGameObjectWithTag("SoundEffect").GetComponent<EffectPlayer>();
     }
 
     // Update is called once per frame
@@ -50,8 +57,13 @@ public class ScoreCalulateScript : MonoBehaviour
             MergeObject.WataermalonMarge = false;
         }
 
-
         onUpdateBonus();
+
+        //DEBUG
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            score += 900;
+        }
     }
 
     private void Awake()
@@ -74,12 +86,29 @@ public class ScoreCalulateScript : MonoBehaviour
             bonusText.text = "";
         }
         totalscoreText.text = score.ToString();
+
+        if (score >= 1000 && canRunthisSound)
+        {
+            canRunthisSound = false;
+            effectplayerscript.runPointVoice(1000);
+        }
+        if (score >= 5000 && canRunthisSound2)
+        {
+            canRunthisSound2 = false;
+            effectplayerscript.runPointVoice(5000);
+        }
+        if (score >= 10000 && canRunthisSound3)
+        {
+            canRunthisSound3 = false;
+            effectplayerscript.runPointVoice(10000);
+        }
     }
 
     void AddBonusPoint(float Point)
     {
         BonusScore += Point;
         BonusCircleFill.fillAmount = BonusScore;
+        effectplayerscript.runPlayBonusSound();
     }
 
     private void onUpdateBonus()

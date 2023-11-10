@@ -136,7 +136,7 @@ MonoBehaviour:
   thisObjectScore: 6
   HasBonus: 0
   BonusScore: 0
-  BonusPoint: 0.01
+  BonusPoint: 0.02
 --- !u!60 &415367114818306633
 PolygonCollider2D:
   m_ObjectHideFlags: 0

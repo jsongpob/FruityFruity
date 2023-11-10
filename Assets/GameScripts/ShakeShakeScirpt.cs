@@ -6,19 +6,31 @@ using UnityEngine.SceneManagement;
 public class ShakeShakeScirpt : MonoBehaviour
 {
     public Animator Animate;
-    float timer = 0f;
     public float TimeToShake = 0f;
+
+    float timerSensor = 0f;
+    bool canShake = true;
+
+    EffectPlayer effectplayerscript;
+
 
     void Start()
     {
-
+        effectplayerscript = GameObject.FindGameObjectWithTag("SoundEffect").GetComponent<EffectPlayer>();
+        effectplayerscript.runShakeVoice();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Arduino_Initial.vib_Value2 == 1 && canShake)
         {
-            StartCoroutine(TestShakeTime());
+            Animate.SetBool("StartShake", true);
+            timerSensor += Time.deltaTime;
+            if (timerSensor >= 1)
+            {
+                canShake = false;
+                StartCoroutine(UseSensor());
+            }
         }
     }
 
@@ -37,16 +49,13 @@ public class ShakeShakeScirpt : MonoBehaviour
         SceneManager.LoadScene("Fruit_Funfact");
     }
 
-    void UseSensor()
+    IEnumerator UseSensor()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            StartCoroutine(ShakeTime());
-            timer += Time.deltaTime;
-            if (timer >= TimeToShake)
-            {
-                SceneManager.LoadScene("Fruit_Funfact");
-            }
-        }
+        canShake = false;
+        Animate.SetBool("StartShake", true);
+        yield return new WaitForSeconds(1f);
+        Animate.SetBool("StartShake", false);
+        SceneManager.LoadScene("Fruit_Funfact");
+        canShake = true;
     }
 }

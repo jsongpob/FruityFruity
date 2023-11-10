@@ -28,10 +28,12 @@ public class MergeObject : MonoBehaviour
     bool canMerge = false;
     bool startMerge = false;
 
+    EffectPlayer effectplayerscript;
 
     // Start is called before the first frame update
     void Start()
     {
+        effectplayerscript = GameObject.FindGameObjectWithTag("SoundEffect").GetComponent<EffectPlayer>();
         ObjectID = GetInstanceID();
         StartCoroutine(WaitingMerged());
     }
@@ -66,6 +68,7 @@ public class MergeObject : MonoBehaviour
                 Destroy(this.gameObject);
                 //NewMargedObject.GetComponent<Rigidbody2D>();
 
+                effectplayerscript.PlayEffectMerage();
                 AddPoint();
             }
         }
@@ -94,7 +97,7 @@ public class MergeObject : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Watermalon"))
         {
-            WataermalonMarge = true;
+            effectplayerscript.runWatermalonVoice();
         }
     }
 
