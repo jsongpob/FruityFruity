@@ -171,11 +171,10 @@ MonoBehaviour:
   - Pear
   - Pomegranate
   - Mango
-  - DragonFruit
-  thisObjectScore: 200
+  thisObjectScore: 100
   HasBonus: 0
   BonusScore: 0
-  DestoryDelay: 6
+  DestoryDelay: 7
 --- !u!114 &6552549958540523405
 MonoBehaviour:
   m_ObjectHideFlags: 0

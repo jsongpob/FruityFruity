@@ -23,9 +23,9 @@ public class DurainManger : MonoBehaviour
         {
             if (timer == 0)
             {
-                effectplayerscript.runPlayDurainVoice();
                 Instantiate(DurainObject, transform.position, Quaternion.identity);
                 timer++;
+                effectplayerscript.runPlayDurainVoice();
             }
         }
         else

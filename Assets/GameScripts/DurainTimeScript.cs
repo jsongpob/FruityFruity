@@ -17,7 +17,7 @@ public class DurainTimeScript : MonoBehaviour
 
     private void Update()
     {
-        if (this.gameObject.transform.position.y < 3)
+        if (this.gameObject.transform.position.y < 5)
         {
             destorytimer += Time.deltaTime;
             if (destorytimer > DestoryDelay)

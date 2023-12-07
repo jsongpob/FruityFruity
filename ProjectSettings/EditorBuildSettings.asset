@@ -6,14 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/InGameScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/01IdleScene.unity
+    guid: 9328a39867fcd4cf7b7d9cbcf6cbfc2f
   - enabled: 1
     path: Assets/Scenes/02InsertNameScene.unity
     guid: d83f225566d6b4e23b1e7d90286b6556
-  - enabled: 1
-    path: Assets/Scenes/01IdleScene.unity
-    guid: 9328a39867fcd4cf7b7d9cbcf6cbfc2f
   - enabled: 1
     path: Assets/Scenes/03TutorialGuideScene.unity
     guid: 837501a8d81aa437f85fca127e7aa923
@@ -21,9 +18,21 @@ EditorBuildSettings:
     path: Assets/Scenes/04TutorialGuideScene2.unity
     guid: 96213c0b31377406898cb29c829a7528
   - enabled: 1
+    path: Assets/Scenes/InGameScene.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
     path: Assets/Scenes/ShakeScene.unity
     guid: d793659c3e2ac4244aa821ceeeee49c1
   - enabled: 1
     path: Assets/Scenes/Fruit_Funfact.unity
     guid: 850ea1a83807340d1b24ff3dec79bd01
+  - enabled: 1
+    path: Assets/Scenes/UIanimate.unity
+    guid: 500bc66331cab4638a86aa5ad265be09
+  - enabled: 1
+    path: Assets/Scenes/TestScene.unity
+    guid: 1faaaec8b14ea40d282f5181caf192bd
+  - enabled: 1
+    path: Assets/Scenes/!!TestScene.unity
+    guid: 50197f31f54324d06946c18209df6f20
   m_configObjects: {}

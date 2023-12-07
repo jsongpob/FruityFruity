@@ -135,5 +135,6 @@ public class GameDataManage : MonoBehaviour
         GamedataPlayerName = "";
         ScoreCalulateScript.score = 0f;
         DeadLineDetectionScript.onDead = false;
+        ScoreCalulateScript.BonusScore = 0;
     }
 }

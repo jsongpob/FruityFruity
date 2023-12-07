@@ -5,12 +5,14 @@ using UnityEngine.UI;
 
 public class ScoreCalulateScript : MonoBehaviour
 {
+    public Text TestText;
+
     public static ScoreCalulateScript instance;
     public Text totalscoreText;
     public Text bonusText;
 
     public Image BonusCircleFill;
-    float BonusScore = 0f;
+    public static float BonusScore = 0f;
     float BonusCircleFillTime = 0f;
     bool BCFActive = false;
     bool BCFUnActive = false;
@@ -45,6 +47,8 @@ public class ScoreCalulateScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        onUpdateBonus();
+
         if (DeadLineDetectionScript.onDead)
         {
             bonusText.text = "Fail!";
@@ -57,12 +61,10 @@ public class ScoreCalulateScript : MonoBehaviour
             MergeObject.WataermalonMarge = false;
         }
 
-        onUpdateBonus();
-
         //DEBUG
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            score += 900;
+            score += 990;
         }
     }
 
@@ -116,20 +118,22 @@ public class ScoreCalulateScript : MonoBehaviour
         if (BCFActive)
         {
             BonusCircleFillTime += Time.deltaTime;
-            BonusCircleFill.fillAmount = BonusCircleFillTime;
+            BonusCircleFill.fillAmount = BonusCircleFillTime/4;
             if (BonusCircleFillTime >= BonusScore)
             {
                 BCFActive = false;
             }
         }
 
-        if(BonusScore >= 1)
+        if(BonusScore >= 4)
         {
             canDurainTime = true;
             BonusScore += 0.2f;
             bonusText.text = "BONUS TIME!";
             StartCoroutine(delayBonus());
         }
+
+        TestText.text = BonusScore.ToString();
 
         if (BCFUnActive)
         {
@@ -147,7 +151,7 @@ public class ScoreCalulateScript : MonoBehaviour
     IEnumerator delayBonus()
     {
         yield return new WaitForSeconds(BonusTimeSec);
-        BonusScore = 0;
+        BonusScore = 0f;
         BCFUnActive = true;
     }
 }
